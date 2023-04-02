@@ -1,4 +1,4 @@
- pipeline{
+pipeline{
     agent any
     stages{
       //git checkout private repo credentials are given in pipeline with scm //       
@@ -17,9 +17,12 @@
         stage('push to jfrog'){
              steps{
                 echo 'this step to push artifact to JFROG'
-          // sh 'sudo cp /var/lib/jenkins/workspace/deploy/target/MyWebApp.war /opt/tomcat/apache-tomcat-9.0.68/webapps/'
+          withCredentials([usernameColonPassword(credentialsId: 'jfrog-new', variable: 'jfrog-new')]) {
+    // some block
+
           // curl -uadmin:AP3GDK2UevLagTyD5qtkLkkfUd6 -T /var/lib/jenkins/workspace/deploy/target/MyWebApp.war "http://3.7.254.225:8081/artifactory/deploy/"
-            sh 'curl -u "${jfrog-new}" -T /var/lib/jenkins/workspace/deploy/target/MyWebApp.war "http://3.7.254.225:8081/artifactory/deploy/" ' 
+            sh 'curl -u "$jfrog-new" -T /var/lib/jenkins/workspace/deploy/target/MyWebApp.war "http://3.7.254.225:8081/artifactory/deploy/" ' 
+             }
              }
              
           }
