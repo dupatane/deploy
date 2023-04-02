@@ -21,7 +21,7 @@ pipeline{
     // some block
 
           // curl -uadmin:AP3GDK2UevLagTyD5qtkLkkfUd6 -T /var/lib/jenkins/workspace/deploy/target/MyWebApp.war "http://3.7.254.225:8081/artifactory/deploy/"
-            sh 'curl -u $jfrog-new -T /var/lib/jenkins/workspace/deploy/target/MyWebApp.war "http://3.7.254.225:8081/artifactory/deploy/" ' 
+              sh 'curl -u {$jfrog-new} -T /var/lib/jenkins/workspace/deploy/target/MyWebApp.war "http://3.7.254.225:8081/artifactory/deploy/" ' 
              }
              }
              
