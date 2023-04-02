@@ -27,7 +27,7 @@
              steps{ 
                  withCredentials([usernameColonPassword(credentialsId: 'jfrog', variable: 'jfrog')]) {
                     echo 'this step to deploy artifact to tomcat environment'
-            sh 'curl -L -u$jfrog -o /opt/tomcat/apache-tomcat-9.0.68/webapps/ "http://3.7.254.225:8081/artifactory/deploy/MyWebApp.war"'
+              sh 'sudo sh -c \'curl -u$jfrog -O "http://3.7.254.225:8081/artifactory/deploy/MyWebapp.war" && mv MyWebapp.war /opt/tomcat/apache-tomcat-9.0.68/webapps/\''
     
              }
           } 
