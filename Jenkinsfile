@@ -1,4 +1,4 @@
- pipeline{
+  pipeline{
     agent any
     stages{
       //git checkout private repo credentials are given in pipeline with scm //       
@@ -17,19 +17,23 @@
         stage('push to jfrog'){
              steps{
                 echo 'this step to push artifact to JFROG'
-                withCredentials([usernameColonPassword(credentialsId: 'jfrog', variable: 'jfrog')]) {
-                    sh 'curl -u$jfrog -T /var/lib/jenkins/workspace/deploy/target/MyWebApp.war "http://3.7.254.225:8081/artifactory/deploy/"' 
-                }
+          withCredentials([usernameColonPassword(credentialsId: 'jfrog', variable: 'jfrog')]) {
+              sh 'curl -u$jfrog -T /var/lib/jenkins/workspace/deploy/target/MyWebApp.war "http://3.7.254.225:8081/artifactory/example-repo-local/" ' 
              }
+             }
+             
           }
         stage('deploy to tomcat'){
              steps{ 
                  withCredentials([usernameColonPassword(credentialsId: 'jfrog', variable: 'jfrog')]) {
                     echo 'this step to deploy artifact to tomcat environment'
-                    sh 'curl -u$jfrog -O "http://3.7.254.225:8081/artifactory/deploy/MyWebapp.war"'
-                    sh 'sudo mv MyWebapp.war /opt/tomcat/apache-tomcat-9.0.68/webapps/'
-                 }
-             } 
+   //curl -uadmin:AP3GDK2UevLagTyD5qtkLkkfUd6 -O "http://3.7.254.225:8081/artifactory/deploy/<TARGET_FILE_PATH>"
+        sh 'curl -u$jfrog -O "http://3.7.254.225:8081/artifactory/example-repo-local/MyWebapp.war"'
+        sh 'cp MyWebapp.war /opt/tomcat/apache-tomcat-9.0.68/webapps/'
+    
+             }
+          } 
+
         }
     }
     post {
@@ -40,4 +44,5 @@
                      to: "dupatanekrishna@gmail.com"
         }
     }
+
 }
