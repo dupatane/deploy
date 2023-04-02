@@ -1,9 +1,9 @@
 pipeline{
-    agent {label 'JFROG-server'}
+    agent any
     stages{
        stage('Git Checkout Stage'){
             steps{
-                git branch: 'main', url: 'https://github.com/dupatane/sonarqube-example.git'
+                git branch: 'main', url: 'https://github.com/dupatane/deploy.git'
             }
          }        
        stage('Build Stage'){
@@ -14,7 +14,7 @@ pipeline{
         stage('SonarQube Analysis Stage') {
             steps{
                 withSonarQubeEnv('sonar') { 
-                    sh "mvn clean verify sonar:sonar -Dsonar.projectKey=sonar-test"
+                    sh "mvn clean verify sonar:sonar -Dsonar.projectKey=deploy"
                 }
             }
         }
