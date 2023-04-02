@@ -19,7 +19,7 @@
                 echo 'this step to push artifact to JFROG'
           // sh 'sudo cp /var/lib/jenkins/workspace/deploy/target/MyWebApp.war /opt/tomcat/apache-tomcat-9.0.68/webapps/'
           // curl -uadmin:AP3GDK2UevLagTyD5qtkLkkfUd6 -T /var/lib/jenkins/workspace/deploy/target/MyWebApp.war "http://3.7.254.225:8081/artifactory/deploy/"
-            sh 'curl -u "${jfrog}" -T /var/lib/jenkins/workspace/deploy/target/MyWebApp.war "http://3.7.254.225:8081/artifactory/deploy/" ' 
+            sh 'curl -u "${jfrog-new}" -T /var/lib/jenkins/workspace/deploy/target/MyWebApp.war "http://3.7.254.225:8081/artifactory/deploy/" ' 
              }
              
           }
