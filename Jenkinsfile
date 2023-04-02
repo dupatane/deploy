@@ -1,11 +1,7 @@
 pipeline{
     agent any
     stages{
-      // stage('Git Checkout Stage'){
-       //     steps{
-       //         git branch: 'main', url: 'https://github.com/dupatane/deploy.git'
-       //     }
-      //   }        
+      //git checkout private repo credentials are given in pipeline with scm //       
        stage('Build Stage'){
             steps{
                 sh 'mvn clean install'
@@ -18,5 +14,12 @@ pipeline{
                 }
             }
         }
+        stage('deploy to tomcat'){
+             steps{
+                echo 'this step to deploy artifact to tomcat environment'
+           sh 'sudo cp /var/lib/jenkins/workspace/deploy/target/MyWebApp.war /opt/tomcat/apache-tomcat-9.0.68/webapps/'
+             }
+          } 
+
     }
 }
