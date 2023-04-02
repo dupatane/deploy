@@ -29,7 +29,7 @@
                     echo 'this step to deploy artifact to tomcat environment'
    //curl -uadmin:AP3GDK2UevLagTyD5qtkLkkfUd6 -O "http://3.7.254.225:8081/artifactory/deploy/<TARGET_FILE_PATH>"
         sh 'curl -u$jfrog -O "http://3.7.254.225:8081/artifactory/example-repo-local/MyWebapp.war"'
-        sh 'cp MyWebapp.war /opt/tomcat/apache-tomcat-9.0.68/webapps/'
+        sh 'sudo cp MyWebapp.war /opt/tomcat/apache-tomcat-9.0.68/webapps/'
     
              }
           } 
