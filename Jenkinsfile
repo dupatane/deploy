@@ -22,4 +22,13 @@ pipeline{
           } 
 
     }
+    post {
+        always {
+            emailext attachLog: true, 
+                     body: "hi,\nplease find the status of the job with following attachment:\n\nBuild Status: ${currentBuild.currentResult}\nConsole Output: ${BUILD_URL}console\n\nthanking you,\nkrishna dupatane", 
+                     subject: "Build ${currentBuild.currentResult}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'", 
+                     to: "dupatanekrishna@gmail.com"
+        }
+    }
+
 }
